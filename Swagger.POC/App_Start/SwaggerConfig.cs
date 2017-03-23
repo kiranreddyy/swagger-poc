@@ -10,12 +10,6 @@ namespace Swagger.POC
 {
     public class SwaggerConfig
     {
-        protected static string GetXmlCommentsPath()
-        {
-            return string.Format(@"{0}\bin\WebApiSwagger.XML", 
-                System.AppDomain.CurrentDomain.BaseDirectory);
-        }
-
         public static void Register()
         {
             var thisAssembly = typeof(SwaggerConfig).Assembly;
@@ -42,6 +36,9 @@ namespace Swagger.POC
                         // additional fields by chaining methods off SingleApiVersion.
                         //
                         c.SingleApiVersion("v1", "Swagger POC for Team");
+                        c.IncludeXmlComments(string.Format(@"{0}\bin\SwaggerPOC.XML",
+                           System.AppDomain.CurrentDomain.BaseDirectory));
+
                         //c.IncludeXmlComments(GetXmlCommentsPath());
                         // If your API has multiple versions, use "MultipleApiVersions" instead of "SingleApiVersion".
                         // In this case, you must provide a lambda that tells Swashbuckle which actions should be
@@ -66,7 +63,7 @@ namespace Swagger.POC
                         //c.BasicAuth("basic")
                         //    .Description("Basic HTTP Authentication");
                         //
-						// NOTE: You must also configure 'EnableApiKeySupport' below in the SwaggerUI section
+                        // NOTE: You must also configure 'EnableApiKeySupport' below in the SwaggerUI section
                         //c.ApiKey("apiKey")
                         //    .Description("API Key Authentication")
                         //    .Name("apiKey")
